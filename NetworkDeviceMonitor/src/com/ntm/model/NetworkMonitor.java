@@ -1,0 +1,63 @@
+package com.ntm.model;
+
+//Java Program to Ping an IP address 
+import java.io.*;
+import java.net.*;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import com.ntm.view.NetworkMonitorGUI;
+
+///////////////////////////////////////////////////////////////////////////
+///											   						    ///
+/// PLEASE FEEL FREE TO CHANGE AND IMPROVE WHAT HAS BEEN IMPLEMENETED!  ///
+///															  		    ///
+///////////////////////////////////////////////////////////////////////////
+
+public class NetworkMonitor extends TimerTask{
+	// Sends ping request to a provided IP address
+	public static void sendPingRequest(String ipAddress) throws UnknownHostException, IOException {
+		InetAddress geek = InetAddress.getByName(ipAddress);
+		System.out.println("Sending Ping Request to " + ipAddress);
+		if (geek.isReachable(5000))
+			System.out.println("Host is reachable\n");
+		else
+			System.out.println("Sorry ! We can't reach to this host\n");
+	}
+
+	// Driver code
+	public static void main(String[] args) throws UnknownHostException, IOException {
+		
+		NetworkMonitorGUI gui = new NetworkMonitorGUI();
+		
+		Timer timer = new Timer();
+		timer.schedule(new NetworkMonitor(), 0, 5000);
+		
+		/*
+		String ipAddress = "192.168.1.52";
+		sendPingRequest(ipAddress);
+
+		ipAddress = "192.168.1.34";
+		sendPingRequest(ipAddress);
+
+		ipAddress = "133.192.31.42";
+		sendPingRequest(ipAddress);
+		*/
+	}
+
+	@Override
+	public void run() {
+		String ipAddress = "192.168.1.52";
+		try {
+			sendPingRequest(ipAddress);
+			ipAddress = "192.168.1.34";
+			sendPingRequest(ipAddress);
+			ipAddress = "133.192.31.42";
+			sendPingRequest(ipAddress);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+	}
+}
