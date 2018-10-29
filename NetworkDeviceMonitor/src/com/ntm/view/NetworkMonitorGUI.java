@@ -8,36 +8,30 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 
 public class NetworkMonitorGUI {
-	private JFrame gui1;
-	private JList b;
+	private JFrame frame;
+	private JList<String> list;
 
+	/**
+	 * Init Network Monitor GUI
+	 */
 	public NetworkMonitorGUI() {
+		frame = new JFrame("Watch & Pray");
+		frame.setLayout(new GridLayout(1, 2));
 
-		gui1 = new JFrame("Watch & Pray");
-		// GridLayout gridLayout = new GridLayout(1,2);
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel("select"); // un-used?!
+		String week[] = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
-		gui1.setLayout(new GridLayout(1, 2));
-		// create a panel
-		JPanel p = new JPanel();
+		list = new JList<String>(week);
+		list.setSelectedIndex(0);
 
-		// create a new label
-		JLabel l = new JLabel("select");
+		panel.add(list);
 
-		// String array to store weekdays
-		String week[] = { "Monday", "Tuesday", "Wednesday", "Thursday",
-				"Friday", "Saturday", "Sunday" };
-		b = new JList(week);
-		b.setSelectedIndex(0);
-
-		p.add(b);
-
-		gui1.add(p, 0, 0);
-
-		gui1.setSize(1024, 768);
-		gui1.setVisible(true);
-		// Exit the application when the window is closed
-		gui1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gui1.setLocationRelativeTo(null); // Center window on screen
+		frame.add(panel, 0, 0);
+		frame.setSize(1024, 768);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null); 
 	}
 
 }

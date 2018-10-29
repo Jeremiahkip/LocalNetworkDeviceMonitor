@@ -14,50 +14,48 @@ import com.ntm.view.NetworkMonitorGUI;
 ///															  		    ///
 ///////////////////////////////////////////////////////////////////////////
 
-public class NetworkMonitor extends TimerTask{
-	// Sends ping request to a provided IP address
-	public static void sendPingRequest(String ipAddress) throws UnknownHostException, IOException {
-		InetAddress geek = InetAddress.getByName(ipAddress);
-		System.out.println("Sending Ping Request to " + ipAddress);
-		if (geek.isReachable(5000))
-			System.out.println("Host is reachable\n");
-		else
-			System.out.println("Sorry ! We can't reach to this host\n");
-	}
+public class NetworkMonitor extends TimerTask {
 
-	// Driver code
-	public static void main(String[] args) throws UnknownHostException, IOException {
-		
-		NetworkMonitorGUI gui = new NetworkMonitorGUI();
-		
-		Timer timer = new Timer();
-		timer.schedule(new NetworkMonitor(), 0, 5000);
-		
-		/*
-		String ipAddress = "192.168.1.52";
-		sendPingRequest(ipAddress);
-
-		ipAddress = "192.168.1.34";
-		sendPingRequest(ipAddress);
-
-		ipAddress = "133.192.31.42";
-		sendPingRequest(ipAddress);
-		*/
-	}
-
-	@Override
-	public void run() {
-		String ipAddress = "192.168.1.52";
+	/**
+	 * Sends ping request to a provided IP address
+	 * 
+	 * @param ipAddress
+	 */
+	public static void sendPingRequest(String ipAddress) {
 		try {
-			sendPingRequest(ipAddress);
-			ipAddress = "192.168.1.34";
-			sendPingRequest(ipAddress);
-			ipAddress = "133.192.31.42";
-			sendPingRequest(ipAddress);
+			InetAddress host = InetAddress.getByName(ipAddress);
+			System.out.println("Sending Ping Request to " + ipAddress);
+
+			if (host.isReachable(5000)) {
+				System.out.println("Host is reachable\n");
+			} else {
+				System.out.println("Sorry ! We can't reach to this host\n");
+			}
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
+		}
+	}
+
+	/**
+	 * Driver code
+	 * 
+	 * @param String[] args
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
+	public static void main(String[] args) throws UnknownHostException, IOException {
+		NetworkMonitorGUI gui = new NetworkMonitorGUI();
+
+		Timer timer = new Timer();
+		timer.schedule(new NetworkMonitor(), 0, 5000);
+	}
+
+	@Override
+	public void run() {
+		sendPingRequest("192.168.1.52");
+		sendPingRequest("192.168.1.34");
+		sendPingRequest("133.192.31.42");
 	}
 }
