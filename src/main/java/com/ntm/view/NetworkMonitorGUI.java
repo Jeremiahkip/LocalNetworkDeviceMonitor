@@ -8,6 +8,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 
 public class NetworkMonitorGUI {
+
 	private JFrame gui1;
 	private JList b;
 

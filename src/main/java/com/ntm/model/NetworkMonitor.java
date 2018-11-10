@@ -1,8 +1,9 @@
 package com.ntm.model;
 
 //Java Program to Ping an IP address 
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,7 +15,8 @@ import com.ntm.view.NetworkMonitorGUI;
 ///															  		    ///
 ///////////////////////////////////////////////////////////////////////////
 
-public class NetworkMonitor extends TimerTask{
+public class NetworkMonitor extends TimerTask {
+
 	// Sends ping request to a provided IP address
 	public static void sendPingRequest(String ipAddress) throws UnknownHostException, IOException {
 		InetAddress geek = InetAddress.getByName(ipAddress);
@@ -27,27 +29,27 @@ public class NetworkMonitor extends TimerTask{
 
 	// Driver code
 	public static void main(String[] args) throws UnknownHostException, IOException {
-		
+
 		NetworkMonitorGUI gui = new NetworkMonitorGUI();
-		
+
 		Timer timer = new Timer();
 		timer.schedule(new NetworkMonitor(), 0, 5000);
-		
+
 		/*
-		String ipAddress = "192.168.1.52";
-		sendPingRequest(ipAddress);
-
-		ipAddress = "192.168.1.34";
-		sendPingRequest(ipAddress);
-
-		ipAddress = "133.192.31.42";
-		sendPingRequest(ipAddress);
-		*/
+		 * String ipAddress = "192.168.1.52";
+		 * sendPingRequest(ipAddress);
+		 * 
+		 * ipAddress = "192.168.1.34";
+		 * sendPingRequest(ipAddress);
+		 * 
+		 * ipAddress = "133.192.31.42";
+		 * sendPingRequest(ipAddress);
+		 */
 	}
 
 	@Override
 	public void run() {
-		String ipAddress = "192.168.1.52";
+		String ipAddress = "192.168.0.14";
 		try {
 			sendPingRequest(ipAddress);
 			ipAddress = "192.168.1.34";
@@ -58,6 +60,6 @@ public class NetworkMonitor extends TimerTask{
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
+		}
 	}
 }
